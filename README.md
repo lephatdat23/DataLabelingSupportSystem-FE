@@ -14,15 +14,3 @@ Frontend được xây dựng bằng **React**, giao tiếp với Backend (Java 
 - 🔗 REST API
 
 ---
-
-## 📂 Cấu trúc thư mục (tham khảo)
-
-```text
-src/
- ├── api/           # Gọi API backend
- ├── components/    # Component tái sử dụng
- ├── pages/         # Các trang chính
- ├── hooks/         # Custom hooks
- ├── services/      # Xử lý logic, request
- ├── App.jsx
- └── main.jsx
