@@ -9,8 +9,8 @@ Frontend được xây dựng bằng **React**, giao tiếp với Backend (Java 
 ## 🚀 Công nghệ sử dụng
 
 - ⚛️ React (Vite / CRA)
-- 🟦 JavaScript / TypeScript
-- 🎨 CSS / Tailwind / MUI (tuỳ project)
+- 🟦 TypeScript
+- 🎨 CSS / Tailwind / MUI 
 - 🔗 REST API
 
 ---
