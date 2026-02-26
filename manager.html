@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Admin Dashboard</title>
+<title>Manager Dashboard</title>
 
 <style>
 * {
@@ -16,7 +16,7 @@
 body {
     display: flex;
     min-height: 100vh;
-    background: radial-gradient(circle at top left, #1d4ed8 0, #020617 45%, #020617 100%);
+    background: radial-gradient(circle at top left, #0f766e 0, #020617 45%, #020617 100%);
     color: #0f172a;
 }
 
@@ -98,11 +98,11 @@ body {
 }
 
 .sidebar-nav li.active {
-    background: linear-gradient(135deg, rgba(55, 65, 81, 0.9), rgba(30, 64, 175, 0.9));
+    background: linear-gradient(135deg, rgba(15, 118, 110, 0.9), rgba(16, 185, 129, 0.9));
 }
 
 .sidebar-nav li:hover {
-    background: rgba(55, 65, 81, 0.9);
+    background: rgba(31, 41, 55, 0.9);
     transform: translateY(-1px);
 }
 
@@ -121,7 +121,7 @@ body {
     display: flex;
     flex-direction: column;
     gap: 18px;
-    background: radial-gradient(circle at top left, rgba(59, 130, 246, 0.2) 0, rgba(15, 23, 42, 0.02) 40%, #020617 100%);
+    background: radial-gradient(circle at top left, rgba(34, 197, 94, 0.25) 0, rgba(15, 23, 42, 0.02) 40%, #020617 100%);
 }
 
 /* HEADER */
@@ -149,36 +149,29 @@ body {
     gap: 12px;
 }
 
-.search-box {
-    position: relative;
-}
-
-.search-box input {
+.filter-pill {
+    display: flex;
+    gap: 8px;
     background: rgba(15, 23, 42, 0.85);
     border-radius: 999px;
-    border: 1px solid rgba(148, 163, 184, 0.5);
-    padding: 8px 14px;
-    padding-left: 30px;
-    color: #e5e7eb;
-    font-size: 13px;
-    outline: none;
-    width: 210px;
+    padding: 4px;
+    border: 1px solid rgba(148, 163, 184, 0.6);
+    font-size: 12px;
 }
 
-.search-box input::placeholder {
-    color: #6b7280;
-}
-
-.search-icon {
-    position: absolute;
-    left: 10px;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 10px;
-    height: 10px;
+.filter-pill button {
+    border: none;
+    background: transparent;
+    color: #9ca3af;
+    padding: 4px 10px;
     border-radius: 999px;
-    border: 2px solid #6b7280;
-    box-shadow: 7px 7px 0 -4px #6b7280;
+    cursor: pointer;
+    font-size: 12px;
+}
+
+.filter-pill button.active {
+    background: rgba(34, 197, 94, 0.15);
+    color: #bbf7d0;
 }
 
 .user-pill {
@@ -235,7 +228,7 @@ body {
     content: "";
     position: absolute;
     inset: 0;
-    background: radial-gradient(circle at top right, rgba(96, 165, 250, 0.45), transparent 55%);
+    background: radial-gradient(circle at top right, rgba(52, 211, 153, 0.5), transparent 55%);
     opacity: 0.85;
     pointer-events: none;
 }
@@ -260,13 +253,13 @@ body {
     margin-bottom: 6px;
 }
 
-.card-trend {
+.card-sub {
     font-size: 11px;
-    color: #22c55e;
+    color: #6ee7b7;
 }
 
-.card-trend.negative {
-    color: #f97316;
+.card-sub.orange {
+    color: #fed7aa;
 }
 
 /* TABLE */
@@ -327,34 +320,50 @@ tbody tr:hover {
     background: rgba(15, 23, 42, 0.9);
 }
 
-.role {
-    padding: 4px 8px;
-    border-radius: 999px;
-    font-size: 11px;
-    color: white;
-}
-
-.admin { background: linear-gradient(135deg, #ef4444, #b91c1c); }
-.manager { background: linear-gradient(135deg, #3b82f6, #1d4ed8); }
-.annotator { background: linear-gradient(135deg, #10b981, #047857); }
-.reviewer { background: linear-gradient(135deg, #f59e0b, #b45309); }
-
 .status-pill {
     padding: 3px 8px;
     border-radius: 999px;
     font-size: 11px;
 }
 
-.status-active {
+.status-running {
     background: rgba(22, 163, 74, 0.15);
     color: #4ade80;
     border: 1px solid rgba(34, 197, 94, 0.6);
 }
 
-.status-locked {
-    background: rgba(248, 113, 113, 0.12);
-    color: #fca5a5;
-    border: 1px solid rgba(239, 68, 68, 0.6);
+.status-paused {
+    background: rgba(234, 179, 8, 0.12);
+    color: #fde68a;
+    border: 1px solid rgba(234, 179, 8, 0.6);
+}
+
+.status-completed {
+    background: rgba(59, 130, 246, 0.12);
+    color: #bfdbfe;
+    border: 1px solid rgba(59, 130, 246, 0.7);
+}
+
+.progress {
+    width: 100%;
+    background: rgba(31, 41, 55, 0.9);
+    border-radius: 999px;
+    height: 6px;
+    overflow: hidden;
+}
+
+.progress-bar {
+    height: 100%;
+    border-radius: 999px;
+    background: linear-gradient(90deg, #22c55e, #0ea5e9);
+}
+
+.progress-bar.orange {
+    background: linear-gradient(90deg, #f97316, #facc15);
+}
+
+.progress-bar.blue {
+    background: linear-gradient(90deg, #3b82f6, #22c55e);
 }
 
 @media (max-width: 900px) {
@@ -375,10 +384,6 @@ tbody tr:hover {
         width: 100%;
         justify-content: space-between;
     }
-
-    .search-box input {
-        width: 100%;
-    }
 }
 </style>
 </head>
@@ -388,8 +393,8 @@ tbody tr:hover {
     <div class="sidebar-header">
         <div class="sidebar-logo"></div>
         <div class="sidebar-title">
-            <span>DLSS Admin</span>
-            <span>Quản trị hệ thống</span>
+            <span>DLSS Manager</span>
+            <span>Quản lý dự án</span>
         </div>
     </div>
     <ul class="sidebar-nav">
@@ -403,30 +408,30 @@ tbody tr:hover {
         <li>
             <span class="label">
                 <span class="nav-dot"></span>
-                <span>Quản lý người dùng</span>
+                <span>Dự án</span>
             </span>
         </li>
         <li>
             <span class="label">
                 <span class="nav-dot"></span>
-                <span>Phân quyền & vai trò</span>
+                <span>Tiến độ Annotator</span>
             </span>
         </li>
         <li>
             <span class="label">
                 <span class="nav-dot"></span>
-                <span>Nhật ký hệ thống</span>
+                <span>Báo cáo & chất lượng</span>
             </span>
         </li>
         <li>
             <span class="label">
                 <span class="nav-dot"></span>
-                <span>Cấu hình nền tảng</span>
+                <span>Cấu hình team</span>
             </span>
         </li>
     </ul>
     <div class="sidebar-footer">
-        Phiên bản 1.0 · Data Labeling Support System
+        Manager view · Data Labeling Support System
     </div>
 </div>
 
@@ -434,19 +439,20 @@ tbody tr:hover {
 
     <div class="header">
         <div class="header-left">
-            <h1>Admin Dashboard</h1>
-            <p>Quản lý người dùng, vai trò và cài đặt hệ thống</p>
+            <h1>Manager Dashboard</h1>
+            <p>Theo dõi tiến độ dự án, phân bổ annotator và chất lượng output</p>
         </div>
         <div class="header-right">
-            <div class="search-box">
-                <span class="search-icon"></span>
-                <input type="text" placeholder="Tìm kiếm người dùng, email, vai trò...">
+            <div class="filter-pill">
+                <button class="active">Tất cả</button>
+                <button>Đang chạy</button>
+                <button>Chậm tiến độ</button>
             </div>
             <div class="user-pill">
                 <div class="user-avatar"></div>
                 <div class="user-meta">
-                    <span>Super Admin</span>
-                    <span>admin@dlss.local</span>
+                    <span>Project Manager</span>
+                    <span>manager@dlss.local</span>
                 </div>
             </div>
         </div>
@@ -455,30 +461,30 @@ tbody tr:hover {
     <div class="cards">
         <div class="card">
             <div class="card-content">
-                <div class="card-label">Tổng người dùng</div>
-                <div class="card-value">35</div>
-                <div class="card-trend">+4 tài khoản mới tuần này</div>
-            </div>
-        </div>
-        <div class="card">
-            <div class="card-content">
                 <div class="card-label">Tổng dự án</div>
                 <div class="card-value">12</div>
-                <div class="card-trend">3 dự án mới được tạo</div>
+                <div class="card-sub">5 đang chạy · 3 chuẩn bị khởi tạo</div>
             </div>
         </div>
         <div class="card">
             <div class="card-content">
-                <div class="card-label">Người dùng đang hoạt động</div>
-                <div class="card-value">7</div>
-                <div class="card-trend">Đang online trong 15 phút gần đây</div>
+                <div class="card-label">Task chưa gán</div>
+                <div class="card-value">184</div>
+                <div class="card-sub orange">Ưu tiên phân bổ cho annotator online</div>
             </div>
         </div>
         <div class="card">
             <div class="card-content">
-                <div class="card-label">Sự cố hôm nay</div>
-                <div class="card-value">3</div>
-                <div class="card-trend negative">Đang chờ xem xét</div>
+                <div class="card-label">Annotator đang online</div>
+                <div class="card-value">18</div>
+                <div class="card-sub">4 nhóm đang hoạt động</div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-content">
+                <div class="card-label">Tỉ lệ hoàn thành trung bình</div>
+                <div class="card-value">72%</div>
+                <div class="card-sub">Mục tiêu tuần này: ≥ 80%</div>
             </div>
         </div>
     </div>
@@ -486,44 +492,69 @@ tbody tr:hover {
     <div class="table-container">
         <div class="table-header">
             <div>
-                <h2>Danh sách người dùng</h2>
-                <span>Quản lý tài khoản và phân quyền trong hệ thống</span>
+                <h2>Dự án & tiến độ</h2>
+                <span>Tổng quan các project mà bạn đang quản lý</span>
             </div>
-            <span style="font-size:12px;color:#6b7280;">4 / 35 hiển thị</span>
+            <span style="font-size:12px;color:#6b7280;">4 / 12 dự án hiển thị</span>
         </div>
         <table>
             <thead>
                 <tr>
-                    <th>Tên</th>
-                    <th>Email</th>
-                    <th>Vai trò</th>
+                    <th>Tên dự án</th>
+                    <th>Khách hàng</th>
+                    <th>Số task</th>
+                    <th>Hoàn thành</th>
                     <th>Trạng thái</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <td>Minh Thu</td>
-                    <td>minhthu@gmail.com</td>
-                    <td><span class="role admin">Admin</span></td>
-                    <td><span class="status-pill status-active">Hoạt động</span></td>
+                    <td>Labeling ảnh giao thông</td>
+                    <td>SmartCity Corp</td>
+                    <td>12,000</td>
+                    <td>
+                        <div class="progress">
+                            <div class="progress-bar" style="width:68%;"></div>
+                        </div>
+                        <span style="font-size:11px;color:#9ca3af;">68%</span>
+                    </td>
+                    <td><span class="status-pill status-running">Đang chạy</span></td>
                 </tr>
                 <tr>
-                    <td>Phat Dat</td>
-                    <td>phatdat@gmail.com</td>
-                    <td><span class="role manager">Manager</span></td>
-                    <td><span class="status-pill status-active">Hoạt động</span></td>
+                    <td>Nhận dạng hóa đơn</td>
+                    <td>FinPay</td>
+                    <td>8,500</td>
+                    <td>
+                        <div class="progress">
+                            <div class="progress-bar blue" style="width:92%;"></div>
+                        </div>
+                        <span style="font-size:11px;color:#9ca3af;">92%</span>
+                    </td>
+                    <td><span class="status-pill status-completed">Gần hoàn thành</span></td>
                 </tr>
                 <tr>
-                    <td>Nguyen Van A</td>
-                    <td>annotator@gmail.com</td>
-                    <td><span class="role annotator">Annotator</span></td>
-                    <td><span class="status-pill status-locked">Tạm khóa</span></td>
+                    <td>Phân loại cảm xúc review</td>
+                    <td>E‑Commerce VN</td>
+                    <td>5,000</td>
+                    <td>
+                        <div class="progress">
+                            <div class="progress-bar orange" style="width:41%;"></div>
+                        </div>
+                        <span style="font-size:11px;color:#f97316;">41% · Chậm</span>
+                    </td>
+                    <td><span class="status-pill status-paused">Cần thêm nguồn lực</span></td>
                 </tr>
                 <tr>
-                    <td>Tran Thi B</td>
-                    <td>reviewer@gmail.com</td>
-                    <td><span class="role reviewer">Reviewer</span></td>
-                    <td><span class="status-pill status-active">Hoạt động</span></td>
+                    <td>Transcript video đào tạo</td>
+                    <td>EduTech</td>
+                    <td>3,200</td>
+                    <td>
+                        <div class="progress">
+                            <div class="progress-bar" style="width:57%;"></div>
+                        </div>
+                        <span style="font-size:11px;color:#9ca3af;">57%</span>
+                    </td>
+                    <td><span class="status-pill status-running">Đang chạy</span></td>
                 </tr>
             </tbody>
         </table>
